@@ -1,0 +1,167 @@
+Microsoft Windows [Versión 10.0.17763.107]
+(c) 2018 Microsoft Corporation. Todos los derechos reservados.
+
+C:\Users\Administrador>sqlplus /nolog
+
+SQL*Plus: Release 11.2.0.2.0 Production on Mar Oct 29 10:04:20 2019
+
+Copyright (c) 1982, 2014, Oracle.  All rights reserved.
+
+SQL> connec sys/oracle as sysdba
+Connected.
+SQL> show user
+USER is "SYS"
+SQL> show parameter name
+
+NAME                                 TYPE        VALUE
+------------------------------------ ----------- ------------------------------
+db_file_name_convert                 string
+db_name                              string      XE
+db_unique_name                       string      XE
+global_names                         boolean     FALSE
+instance_name                        string      xe
+lock_name_space                      string
+log_file_name_convert                string
+service_names                        string      XE
+SQL>
+SQL> creae user demo IDENTIFIED BY admin
+SP2-0734: unknown command beginning "creae user..." - rest of line ignored.
+SQL> creae user demo IDENTIFIED BY admin;
+SP2-0734: unknown command beginning "creae user..." - rest of line ignored.
+SQL> create user demo IDENTIFIED BY admin;
+
+User created.
+
+SQL> connec demo/admin as sysdba
+Connected.
+SQL> show user
+USER is "SYS"
+SQL> conec demo/admin
+SP2-0734: unknown command beginning "conec demo..." - rest of line ignored.
+SQL> connec demo/admin
+ERROR:
+ORA-01045: user DEMO lacks CREATE SESSION privilege; logon denied
+
+
+Warning: You are no longer connected to ORACLE.
+SQL> GRANT connnect, resource TO demo;
+SP2-0640: Not connected
+SQL> connec demo/admin as sysdba
+Connected.
+SQL> GRAN connect, resource TO demo;
+SP2-0734: unknown command beginning "GRAN conne..." - rest of line ignored.
+SQL> GRANT connect, resource TO demo;
+
+Grant succeeded.
+
+SQL> show user
+USER is "SYS"
+SQL> connec demo/admin
+Connected.
+SQL> show user
+USER is "DEMO"
+SQL> create user vendedor IDENTIFIED BY admin;
+create user vendedor IDENTIFIED BY admin
+                                   *
+ERROR at line 1:
+ORA-01031: insufficient privileges
+
+
+SQL> connec sys/oracle as sysdba
+Connected.
+SQL> show user
+USER is "SYS"
+SQL> create user vendedor IDENTIFIED BY admin;
+
+User created.
+
+SQL> connec vendedor/admin
+ERROR:
+ORA-01045: user VENDEDOR lacks CREATE SESSION privilege; logon denied
+
+
+Warning: You are no longer connected to ORACLE.
+SQL> GRANT connec, resource TO vendedor;
+SP2-0640: Not connected
+SQL> connec vendedor/admin
+ERROR:
+ORA-01045: user VENDEDOR lacks CREATE SESSION privilege; logon denied
+
+
+SQL> create user vendedor IDENTIFIED BY admin;
+SP2-0640: Not connected
+SQL> connec vendedor/oracle as sysdba
+Connected.
+SQL> connec vendedor/admin
+ERROR:
+ORA-01045: user VENDEDOR lacks CREATE SESSION privilege; logon denied
+
+
+Warning: You are no longer connected to ORACLE.
+SQL> GRANT connec, resource TO vendedor;
+SP2-0640: Not connected
+SQL> show user
+USER is ""
+SQL> connec vendedor/oracle as sysdba
+Connected.
+SQL> show user
+USER is "SYS"
+SQL> GRANT connec, resource TO vendedor;
+GRANT connec, resource TO vendedor
+      *
+ERROR at line 1:
+ORA-01919: role 'CONNEC' does not exist
+
+
+SQL> connec sys/oracle as sysdba
+Connected.
+SQL> show user
+USER is "SYS"
+SQL> create user vendedores IDENTIFIED BY admin;
+
+User created.
+
+SQL> connec vendedores/admin
+ERROR:
+ORA-01045: user VENDEDORES lacks CREATE SESSION privilege; logon denied
+
+
+Warning: You are no longer connected to ORACLE.
+SQL> GRANT connec, resource TO vendedores;
+SP2-0640: Not connected
+SQL>
+SQL>
+SQL> show user
+USER is ""
+SQL> connec vendedores/oracle as sysdba
+Connected.
+SQL> create user vendedor IDENTIFIED BY admin;
+create user vendedor IDENTIFIED BY admin
+            *
+ERROR at line 1:
+ORA-01920: user name 'VENDEDOR' conflicts with another user or role name
+
+
+SQL> create user vendedores IDENTIFIED BY admin;
+create user vendedores IDENTIFIED BY admin
+            *
+ERROR at line 1:
+ORA-01920: user name 'VENDEDORES' conflicts with another user or role name
+
+
+SQL> GRANT connec, resource TO vendedores;
+GRANT connec, resource TO vendedores
+      *
+ERROR at line 1:
+ORA-01919: role 'CONNEC' does not exist
+
+
+SQL> GRANT connect, resource TO vendedores;
+
+Grant succeeded.
+
+SQL> connec vendedores/admin
+Connected.
+SQL> show user
+USER is "VENDEDORES"
+SQL>
