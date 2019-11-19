@@ -1,0 +1,174 @@
+Microsoft Windows [Versión 10.0.17763.107]
+(c) 2018 Microsoft Corporation. Todos los derechos reservados.
+
+C:\Users\Administrador>sqlplus /nolog
+
+SQL*Plus: Release 11.2.0.2.0 Production on Mar Nov 19 10:04:58 2019
+
+Copyright (c) 1982, 2014, Oracle.  All rights reserved.
+
+SQL> connect sys/oracle as sysdba
+Connected.
+SQL> create user alberto identified by 1234;
+
+User created.
+
+SQL> grant connec,resource to alberto;
+grant connec,resource to alberto
+      *
+ERROR at line 1:
+ORA-01919: role 'CONNEC' does not exist
+
+
+SQL> grant connect,resource to alberto;
+
+Grant succeeded.
+
+SQL> connec alberto/1234;
+Connected.
+SQL> show user
+USER is "ALBERTO"
+SQL> create table categoria(
+  2  codigo number(2,0)primary key,
+  3  descripcion varchar2(50)not null);
+
+Table created.
+
+SQL> create table usuario(
+  2  codigo number(2,0)primary key,
+  3  nombre varchar2(50)not null,
+  4  pass varchar2(50)not null);
+
+Table created.
+
+SQL> create table producto(
+  2  codigo number(2,0)primary key,
+  3  nombre varchar2(50)not null,
+  4  precio_unitario double not null);
+precio_unitario double not null)
+                       *
+ERROR at line 4:
+ORA-00905: missing keyword
+
+
+SQL> create table producto(
+  2  codigo number(2,0)primary key,
+  3  nombre varchar2(50)not null,
+  4  precio_unitario double);
+precio_unitario double)
+                      *
+ERROR at line 4:
+ORA-00905: missing keyword
+
+
+SQL> create table producto(
+  2  codigo number(2,0)primary key,
+  3  nombre varchar2(50)not null,
+  4  precio_unitario varchar(50)not null);
+
+Table created.
+
+SQL> create sequence sq_categoria;
+
+Sequence created.
+
+SQL> create sequence sq_usuario;
+
+Sequence created.
+
+SQL> create sequence sq_producto;
+
+Sequence created.
+
+SQL> insert into categoria(
+  2  values(sq_categoria.nextval,'ventas');
+values(sq_categoria.nextval,'ventas')
+*
+ERROR at line 2:
+ORA-00928: missing SELECT keyword
+
+
+SQL> insert into categoria(
+  2  values(sq_categoria.nextval,'asdasdasd');
+values(sq_categoria.nextval,'asdasdasd')
+*
+ERROR at line 2:
+ORA-00928: missing SELECT keyword
+
+
+SQL> insert into categoria(
+  2  values(sq_categoria.nextval,'ventas')
+  3  insert into categoria(sda
+  4
+SQL> insert into categoria
+  2  values(sq_categoria.nextval,'ventas');
+
+1 row created.
+
+SQL> insert into categoria
+  2  values(sq_categoria.nextval,'ventas x 2');
+
+1 row created.
+
+SQL> insert into usuario
+  2  values(sq_categoria.nextval,'pepe','123456');
+
+1 row created.
+
+SQL> insert into usuario
+  2  values(sq_categoria.nextval,'maria','112143');
+
+1 row created.
+
+SQL> insert into producto
+  2  values(sq_categoria.nextval,'ricardo','12.12');
+
+1 row created.
+
+SQL> insert into producto
+  2  values(sq_categoria.nextval,'anita','45.50');
+
+1 row created.
+
+SQL> select * from categoria;
+
+    CODIGO DESCRIPCION
+---------- --------------------------------------------------
+         1 ventas
+         2 ventas x 2
+
+SQL> select * from usuario;
+
+    CODIGO NOMBRE
+---------- --------------------------------------------------
+PASS
+--------------------------------------------------
+         3 pepe
+123456
+
+         4 maria
+112143
+
+
+SQL> select * from producto;
+
+    CODIGO NOMBRE
+---------- --------------------------------------------------
+PRECIO_UNITARIO
+--------------------------------------------------
+         5 ricardo
+12.12
+
+         6 anita
+45.50
+
+
+SQL> commit;
+
+Commit complete.
+
+SQL>
+
+
+
+
